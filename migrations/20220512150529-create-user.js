@@ -19,6 +19,7 @@ module.exports = {
       },
       role: {
         type: Sequelize.ENUM("SUPERADMIN", "ADMIN", "MEMBER"),
+        defaultValue: "MEMBER"
       },
       phone: {
         type: Sequelize.STRING,
@@ -35,6 +36,9 @@ module.exports = {
         allowNull: false,
         type: Sequelize.DATE,
         defaultValue: Sequelize.fn("NOW"),
+      },
+      deleted_at: {
+        type: Sequelize.DATE
       },
       deleted_by: {
         type: Sequelize.INTEGER,

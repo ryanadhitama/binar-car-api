@@ -17,9 +17,10 @@ module.exports = (sequelize, DataTypes) => {
     name: DataTypes.STRING,
     email: DataTypes.STRING,
     password: DataTypes.TEXT,
-    role: DataTypes.ENUM,
+    role: DataTypes.ENUM("SUPERADMIN", "ADMIN", "MEMBER"),
     phone: DataTypes.STRING,
     address: DataTypes.TEXT,
+    deleted_at: DataTypes.DATE,
     deleted_by: DataTypes.TEXT
   }, {
     sequelize,

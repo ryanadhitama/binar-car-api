@@ -26,6 +26,9 @@ module.exports = {
       updated_by: {
         type: Sequelize.INTEGER,
       },
+      deleted_at: {
+        type: Sequelize.DATE
+      },
       deleted_by: {
         type: Sequelize.INTEGER,
       },
