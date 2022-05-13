@@ -18,5 +18,9 @@ app.listen(env.PORT, () => {
   console.info(`App listening at http://localhost:${env.PORT}`);
 });
 app.use('/docs', ui.serve, ui.setup(document));
+app.get("/api-docs", (req, res) => {
+  res.sendFile(__dirname + "/swagger.yaml")
+})
+
 
 module.exports = app;
