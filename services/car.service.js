@@ -1,4 +1,4 @@
-const CarRepository = require('../repository/car.repository.js')
+const CarRepository = require("../repository/car.repository.js");
 
 class CarService {
   async getAllCars() {
@@ -9,6 +9,9 @@ class CarService {
     const cars = await CarRepository.getOneById(id);
     return cars;
   }
+  async createCar(data, user) {}
+  async updateCar(id, data, user) {}
+  async deleteCar(id, data, user) {}
 }
 
 module.exports = new CarService();

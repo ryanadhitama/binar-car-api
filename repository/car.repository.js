@@ -18,7 +18,7 @@ class CarRepository {
   }
   async getOneById(id) {
     try {
-      const cars = await models.car.findOne({
+      const car = await models.car.findOne({
         where: {
           id: id,
         },
@@ -28,7 +28,7 @@ class CarRepository {
           },
         ],
       });
-      return cars;
+      return car;
     } catch (err) {
       throw new InternalServerError();
     }

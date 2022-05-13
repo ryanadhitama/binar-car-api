@@ -23,6 +23,18 @@ class InternalServerError extends ApplicationError {
   }
 }
 
+class NotAuthenticated extends ApplicationError {
+  constructor() {
+    super(401);
+  }
+}
+
+class NotFound extends ApplicationError {
+  constructor() {
+    super(404);
+  }
+}
+
 const SuccessFetchResponse = (res, data) => {
   return res.status(200).json({
     success: true,
@@ -30,4 +42,9 @@ const SuccessFetchResponse = (res, data) => {
   });
 };
 
-module.exports = { InternalServerError, SuccessFetchResponse };
+module.exports = {
+  InternalServerError,
+  NotAuthenticated,
+  NotFound,
+  SuccessFetchResponse,
+};
