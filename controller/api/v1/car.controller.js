@@ -7,7 +7,7 @@ class CarController {
       const data = await CarService.getAllCars();
       return SuccessFetchResponse(res, data);
     } catch (err) {
-      res.send(err);
+      res.status(err.status).send(err);
     }
   }
   async getCarById(req, res) {
@@ -16,7 +16,7 @@ class CarController {
       const data = await CarService.getOneById(id);
       return SuccessFetchResponse(res, data);
     } catch (err) {
-      res.send(err);
+      res.status(err.status).send(err);
     }
   }
   async addCar(req, res) {
@@ -24,7 +24,7 @@ class CarController {
       const data = await CarService.createCar(req.body, req.user);
       return SuccessFetchResponse(res, data);
     } catch (err) {
-      res.send(err);
+      res.status(err.status).send(err);
     }
   }
   async updateCar(req, res) {
@@ -33,7 +33,7 @@ class CarController {
       const data = await CarService.updateCar(id, req.body, req.user);
       return SuccessFetchResponse(res, data);
     } catch (err) {
-      res.send(err);
+      res.status(err.status).send(err);
     }
   }
   async deleteCar(req, res) {
@@ -42,7 +42,7 @@ class CarController {
       const data = await CarService.deleteCar(id, req.user);
       return SuccessFetchResponse(res, data);
     } catch (err) {
-      res.send(err);
+      res.status(err.status).send(err);
     }
   }
 }

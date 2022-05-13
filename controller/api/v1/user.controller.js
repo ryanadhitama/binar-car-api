@@ -8,7 +8,7 @@ class UserController {
       const data = await UserService.getOneById(id);
       return SuccessFetchResponse(res, data);
     } catch (err) {
-      res.send(err);
+      res.status(err.status).send(err);
     }
   }
   async updateProfile(req, res) {
@@ -17,7 +17,7 @@ class UserController {
       const data = await UserService.updateUser(id, req.body);
       return SuccessFetchResponse(res, data);
     } catch (err) {
-      res.send(err);
+      res.status(err.status).send(err);
     }
   }
 }

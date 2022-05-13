@@ -68,7 +68,7 @@ class UserRepository {
           id: id,
         },
         attributes: {
-          exclude: ["deleted_at", "deleted_by"],
+          exclude: ["password", "deleted_at", "deleted_by"],
         },
       });
       return user;

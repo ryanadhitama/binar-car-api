@@ -14,7 +14,7 @@ class Authentication {
       req.user = payload;
       next();
     } catch (err) {
-      res.send(new NotAuthenticated());
+      res.status(401).send(new NotAuthenticated());
     }
   }
   async isAdmin(req, res, next) {
@@ -27,7 +27,7 @@ class Authentication {
       next();
       return;
     }
-    res.send(new Forbidden());
+    res.status(403).send(new Forbidden());
   }
   async isSuperadmin(req, res, next) {
     if (!req.user) {
@@ -39,7 +39,7 @@ class Authentication {
       next();
       return;
     }
-    res.send(new Forbidden());
+    res.status(403).send(new Forbidden());
   }
 }
 

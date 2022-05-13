@@ -42,7 +42,20 @@ class CarRepository {
   async store(data) {
     try {
       const car = await models.car.create(data);
-      return car;
+      const newCar = await models.car.findOne({
+        where: {
+          id: car.id,
+        },
+        include: [
+          {
+            model: models.size,
+          },
+        ],
+        attributes: {
+          exclude: ["deleted_at", "deleted_by", "created_by", "updated_by"],
+        },
+      });
+      return newCar;
     } catch (err) {
       throw new InternalServerError();
     }

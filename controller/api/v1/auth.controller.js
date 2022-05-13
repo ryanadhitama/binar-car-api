@@ -8,7 +8,7 @@ class AuthController {
       const data = await UserService.login(email, password);
       return SuccessFetchResponse(res, data);
     } catch (err) {
-      res.send(err);
+      res.status(err.status).send(err);
     }
   }
   async register(req, res) {
@@ -16,7 +16,7 @@ class AuthController {
       const data = await UserService.register(req.body);
       return SuccessFetchResponse(res, data);
     } catch (err) {
-      res.send(err);
+      res.status(err.status).send(err);
     }
   }
 }
