@@ -23,11 +23,16 @@ class UserService {
       const token = jwt.sign(payload, process.env.JWT_SECRET_KEY, {
         expiresIn: "3h",
       });
-      
+
       return { ...payload, token: token };
     }
 
     throw new NotAuthenticated();
+  }
+
+  async getOneById(id) {
+    const user = await UserRepository.getOneById(id);
+    return user;
   }
 }
 

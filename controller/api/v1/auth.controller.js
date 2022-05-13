@@ -10,6 +10,7 @@ class AuthController {
       res.send(err);
     }
   }
+  async register(req, res) {}
 }
 
 module.exports = new AuthController();

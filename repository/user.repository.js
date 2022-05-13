@@ -14,6 +14,21 @@ class UserRepository {
       throw new InternalServerError();
     }
   }
+  async getOneById(id) {
+    try {
+      const user = await models.user.findOne({
+        where: {
+          id: id,
+        },
+        attributes: {
+          exclude: ["password", "deleted_at", "deleted_by"],
+        },
+      });
+      return user;
+    } catch (err) {
+      throw new InternalServerError();
+    }
+  }
 }
 
 module.exports = new UserRepository();
