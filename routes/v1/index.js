@@ -29,6 +29,11 @@ v1.get("/cars/:id", CarController.getCarById);
 // USER
 v1.post("/login", AuthController.login);
 v1.post("/register", AuthController.register);
+v1.put(
+  "/profile",
+  [Authentication.requiredToken],
+  UserController.updateProfile
+);
 v1.get("/profile", [Authentication.requiredToken], UserController.profile);
 
 // ADMIN

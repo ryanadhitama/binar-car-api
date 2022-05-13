@@ -83,6 +83,25 @@ class UserService {
 
     return admin;
   }
+  async updateUser(id, data) {
+    const { name, email, password, phone, address } = data;
+
+    const isExists = await UserRepository.getOneById(id);
+    if (!isExists) {
+      throw new NotFound();
+    }
+
+    const encryptedPassword = await bcrypt.hash(password, 10);
+    const user = await UserRepository.update(id, {
+      name,
+      email,
+      password: encryptedPassword,
+      phone,
+      address,
+    });
+
+    return user;
+  }
   async updateAdmin(id, data) {
     const { name, email, password, phone, address } = data;
 
