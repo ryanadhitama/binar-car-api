@@ -27,7 +27,7 @@ class Authentication {
       next();
       return;
     }
-    res.send(new NotAuthenticated());
+    res.send(new Forbidden());
   }
   async isSuperadmin(req, res, next) {
     if (!req.user) {
