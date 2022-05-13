@@ -16,6 +16,22 @@ Berikut cara menjalankan project ini
 10. Happy Coding 😍
 
 ## 📡 Endpoints 
+| Route              | Method   | Penggunaan                              |
+| ------------------ | -------- | --------------------------------------- |
+| /api/v1/login      | `POST`   | Melakukan proses login                  |
+| /api/v1/register   | `POST`   | Melakukan proses register               |
+| /api/v1/profile    | `GET`    | Mendapatkan data user yang sedang login |
+| /api/v1/profile    | `PUT`    | Mengupdate data user yang sedang login  |
+| /api/v1/cars       | `GET`    | Mendapatkan semua data car              |
+| /api/v1/cars/:id   | `GET`    | Mendapatkan data car berdasar ID        |
+| /api/v1/cars       | `POST`   | Menyimpan data car baru                 |
+| /api/v1/cars/:id   | `PUT`    | Mengupdate data car berdasar ID         |
+| /api/v1/cars/:id   | `DELETE` | Menghapus data car berdasar ID          |
+| /api/v1/admins     | `GET`    | Mendapatkan semua data admin            |
+| /api/v1/admins/:id | `GET`    | Mendapatkan data admin berdasar ID      |
+| /api/v1/admins     | `POST`   | Menyimpan data admin baru               |
+| /api/v1/admins/:id | `PUT`    | Mengupdate data admin berdasar ID       |
+| /api/v1/admins/:id | `DELETE` | Menghapus data admin berdasar ID        |
 
 ## 📜 Directory Structure 
 
