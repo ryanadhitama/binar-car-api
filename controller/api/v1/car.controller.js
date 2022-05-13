@@ -1,5 +1,6 @@
 const CarService = require("../../../services/car.service.js");
 const { SuccessFetchResponse } = require("../../../utils/response.js");
+
 class CarController {
   async getCars(_, res) {
     try {

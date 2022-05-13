@@ -1,5 +1,6 @@
 const UserService = require("../../../services/user.service.js");
 const { SuccessFetchResponse } = require("../../../utils/response.js");
+
 class UserController {
   async profile(req, res) {
     try {

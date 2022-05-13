@@ -32,6 +32,21 @@ v1.post("/register", AuthController.register);
 v1.get("/profile", [Authentication.requiredToken], UserController.profile);
 
 // ADMIN
+v1.post(
+  "/admins",
+  [Authentication.requiredToken, Authentication.isSuperadmin],
+  AdminController.addAdmin
+);
+v1.put(
+  "/admins/:id",
+  [Authentication.requiredToken, Authentication.isSuperadmin],
+  AdminController.updateAdmin
+);
+v1.delete(
+  "/admins/:id",
+  [Authentication.requiredToken, Authentication.isSuperadmin],
+  AdminController.deleteAdmin
+);
 v1.get(
   "/admins",
   [Authentication.requiredToken, Authentication.isSuperadmin],

@@ -8,11 +8,11 @@ const statusType = {
 };
 
 class ApplicationError extends Error {
-  constructor(status) {
+  constructor(status, message = null) {
     super();
 
     Error.captureStackTrace(this, this.constructor);
-    this.message = statusType[status];
+    this.message = message || statusType[status];
     this.status = status;
   }
 }
@@ -41,6 +41,12 @@ class Forbidden extends ApplicationError {
   }
 }
 
+class UserAlreadyExists extends ApplicationError {
+  constructor() {
+    super(403, "User already exists");
+  }
+}
+
 const SuccessFetchResponse = (res, data) => {
   return res.status(200).json({
     success: true,
@@ -53,5 +59,6 @@ module.exports = {
   InternalServerError,
   NotAuthenticated,
   NotFound,
+  UserAlreadyExists,
   SuccessFetchResponse,
 };
