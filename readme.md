@@ -17,4 +17,8 @@ Berikut cara menjalankan project ini
 
 ## 📡 Endpoints 
 
+## 📜 Directory Structure 
+
 ## 💾 ERD 
+
+![Entity Relationship Diagram](db.png)
