@@ -33,7 +33,11 @@ Berikut cara menjalankan project ini
 | /api/v1/admins/:id | `PUT`    | Mengupdate data admin berdasar ID       |
 | /api/v1/admins/:id | `DELETE` | Menghapus data admin berdasar ID        |
 
-## 📜 Directory Structure 
+## 📜 SWAGGER 
+| Route              | Method   | Penggunaan                              |
+| ------------------ | -------- | --------------------------------------- |
+| /docs              | `GET`    | Menampilkan swagger UI                  |
+| /api-docs          | `GET`    | Menampilkan swagger dalam bentuk JSON   |
 
 ## 💾 ERD 
 

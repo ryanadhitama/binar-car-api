@@ -1,0 +1,703 @@
+openapi: 3.0.0
+info:
+  title: Binar Car Management API
+  description: Car Management API to manage car, admin, and authentication
+  contact:
+    email: ryanadhitama2@gmail.com
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  version: 1.0.0
+servers:
+  - url: http://localhost:8000/api/v1/
+    description: Car Management API
+tags:
+  - name: Authentication
+    description: Login and register
+  - name: Profile
+    description: Show current user and update data for current user
+  - name: Admin
+    description: CRUD of admin
+  - name: Car
+    description: CRUD of car
+components:
+  schemas:
+    Login:
+      required:
+        - email
+        - password
+      type: object
+      properties:
+        email:
+          type: string
+          nullable: false
+        password:
+          type: string
+          nullable: false
+    Cars:
+      required:
+        - name
+        - price
+        - size_id
+        - photo
+      type: object
+      properties:
+        model:
+          type: string
+          nullable: false
+        image:
+          type: integer
+          nullable: false
+        size_id:
+          type: integer
+          nullable: false
+        photo:
+          type: string
+          nullable: false
+    User:
+      required:
+        - email
+        - password
+        - name
+        - phone
+        - address
+      type: object
+      properties:
+        email:
+          type: string
+          nullable: false
+        password:
+          type: string
+          nullable: false
+        name:
+          type: string
+          nullable: false
+        phone:
+          type: string
+          nullable: false
+        address:
+          type: string
+          nullable: false
+  examples:
+    NotFoundResponse:
+      value:
+        status: 404
+        message: Not Found
+    NotAuthenticated:
+      value:
+        status: 401
+        message: Unauthorized
+    Forbidden:
+      value:
+        status: 403
+        message: Forbidden
+    SuccessDelete:
+      value:
+        success: true
+        data: null
+    CarRequestBody:
+      value:
+        name: Karimun
+        price: 120000
+        size_id: 1
+        photo: karimun.jpg
+    UserRequestBody:
+      value:
+        name: user baru
+        email: users@binaracademy.com
+        password: rahasia123
+        phone: "008978971"
+        address: Jalan
+    RegisterRequestBody:
+      value:
+        name: newmember
+        email: newmember@binaracademy.com
+        password: rahasia123
+        phone: "008978971"
+        address: Jalan
+    LoginRequestBodySuperadmin:
+      value:
+        email: superadmin@binaracademy.com
+        password: rahasia123
+    LoginRequestBodyAdmin:
+      value:
+        email: admin@binaracademy.com
+        password: rahasia123
+    LoginRequestBodyMember:
+      value:
+        email: member@binaracademy.com
+        password: rahasia123
+    LoginRequestBodyNotFound:
+      value:
+        email: random@binaracademy.com
+        password: rahasia123
+    SuccessfulLoginResponse:
+      value:
+        success: true
+        results:
+          id: 1
+          email: superadmin@binaracademy.com
+          role: SUPERADMIN
+          token: >-
+            eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJzdXBlcmFkbWluMUBiaW5hcmFjYWRlbXkuY29tIiwicm9sZSI6IlNVUEVSQURNSU4iLCJpYXQiOjE2NTI0NDYzMjAsImV4cCI6MTY1MjQ1NzEyMH0.hVUgNqEjVtIGEk-q5HdU-I998-EaFHNTpjO_qYqF8NE
+    SuccessListCars:
+      value:
+        success: true
+        data:
+          - id: 1
+            name: Kijang Innova
+            price: 350000
+            size_id: 2
+            photo: innova.png
+            created_at: "2022-05-12T17:51:49.798Z"
+            updated_at: "2022-05-12T17:51:49.798Z"
+            size:
+              id: 2
+              name: Medium
+              created_at: "2022-05-12T17:51:49.796Z"
+              updated_at: "2022-05-12T17:51:49.796Z"
+          - id: 2
+            name: Avanza
+            price: 450000
+            size_id: 3
+            photo: avanza.png
+            created_at: "2022-05-12T17:51:49.798Z"
+            updated_at: "2022-05-12T17:51:49.798Z"
+            size:
+              id: 3
+              name: Large
+              created_at: "2022-05-12T17:51:49.796Z"
+              updated_at: "2022-05-12T17:51:49.796Z"
+    SuccessDetailCar:
+      value:
+        success: true
+        data:
+          id: 1
+          name: Kijang Innova
+          price: 350000
+          size_id: 2
+          photo: innova.png
+          created_at: "2022-05-12T17:51:49.798Z"
+          updated_at: "2022-05-12T17:51:49.798Z"
+          size:
+            id: 2
+            name: Medium
+            created_at: "2022-05-12T17:51:49.796Z"
+            updated_at: "2022-05-12T17:51:49.796Z"
+    SuccessListAdmin:
+      value:
+        success: true
+        data:
+          - id: 2
+            name: Ryan
+            email: ryan@binaracademy.com
+            role: ADMIN
+            phone: "008978971"
+            address: Jalan
+            created_at: "2022-05-12T17:51:49.798Z"
+            updated_at: "2022-05-12T17:51:49.798Z"
+          - id: 6
+            name: Admin Ryan
+            email: adminryan@binaracademy.com
+            role: ADMIN
+            phone: "008978971"
+            address: Jalan
+            created_at: "2022-05-12T17:51:49.798Z"
+            updated_at: "2022-05-12T17:51:49.798Z"
+    SuccessDetailUser:
+      value:
+        success: true
+        data:
+          id: 2
+          name: Ryan
+          email: ryan@binaracademy.com
+          role: ADMIN
+          phone: "008978971"
+          address: Jalan
+          created_at: "2022-05-12T17:51:49.798Z"
+          updated_at: "2022-05-12T17:51:49.798Z"
+  requestBodies:
+    Login:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Login"
+          examples:
+            Superadmin request:
+              $ref: "#/components/examples/LoginRequestBodySuperadmin"
+            Admin request:
+              $ref: "#/components/examples/LoginRequestBodyAdmin"
+            Member request:
+              $ref: "#/components/examples/LoginRequestBodyMember"
+            Notfound request:
+              $ref: "#/components/examples/LoginRequestBodyNotFound"
+      required: true
+    Register:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/User"
+          examples:
+            New Member request:
+              $ref: "#/components/examples/RegisterRequestBody"
+      required: true
+    Cars:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Cars"
+          examples:
+            DefaultRequest:
+              $ref: "#/components/examples/CarRequestBody"
+    User:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/User"
+          examples:
+            DefaultRequest:
+              $ref: "#/components/examples/UserRequestBody"
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+paths:
+  /login:
+    post:
+      description: Login
+      tags:
+        - Authentication
+      requestBody:
+        $ref: "#/components/requestBodies/Login"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              examples:
+                DefaultResponse:
+                  $ref: "#/components/examples/SuccessfulLoginResponse"
+        "404":
+          description: Not found
+          content:
+            application/json:
+              examples:
+                DefaultResponse:
+                  $ref: "#/components/examples/NotFoundResponse"
+  /register:
+    post:
+      description: Register member
+      tags:
+        - Authentication
+      requestBody:
+        $ref: "#/components/requestBodies/Register"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              examples:
+                DefaultResponse:
+                  $ref: "#/components/examples/SuccessDetailUser"
+  /profile:
+    get:
+      description: Get current user login
+      tags:
+        - Profile
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              examples:
+                DefaultResponse:
+                  $ref: "#/components/examples/SuccessDetailUser"
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              examples:
+                DefaultResponse:
+                  $ref: "#/components/examples/NotAuthenticated"
+    put:
+      description: Update current user login
+      tags:
+        - Profile
+      security:
+        - bearerAuth: []
+      requestBody:
+        $ref: "#/components/requestBodies/User"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              examples:
+                DefaultResponse:
+                  $ref: "#/components/examples/SuccessDetailUser"
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              examples:
+                DefaultResponse:
+                  $ref: "#/components/examples/NotAuthenticated"
+  /admins:
+    get:
+      description: Get all admins
+      tags:
+        - Admin
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              examples:
+                DefaultResponse:
+                  $ref: "#/components/examples/SuccessListAdmin"
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              examples:
+                DefaultResponse:
+                  $ref: "#/components/examples/NotAuthenticated"
+        "403":
+          description: Forbidden
+          content:
+            application/json:
+              examples:
+                DefaultResponse:
+                  $ref: "#/components/examples/Forbidden"
+    post:
+      description: Create new admin
+      tags:
+        - Admin
+      security:
+        - bearerAuth: []
+      requestBody:
+        $ref: "#/components/requestBodies/User"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              examples:
+                DefaultResponse:
+                  $ref: "#/components/examples/SuccessDetailUser"
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              examples:
+                DefaultResponse:
+                  $ref: "#/components/examples/NotAuthenticated"
+        "403":
+          description: Forbidden
+          content:
+            application/json:
+              examples:
+                DefaultResponse:
+                  $ref: "#/components/examples/Forbidden"
+  /admins/{id}:
+    get:
+      description: Get admin by ID
+      tags:
+        - Admin
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: integer
+            example: 2
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              examples:
+                DefaultResponse:
+                  $ref: "#/components/examples/SuccessDetailUser"
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              examples:
+                DefaultResponse:
+                  $ref: "#/components/examples/NotAuthenticated"
+        "403":
+          description: Forbidden
+          content:
+            application/json:
+              examples:
+                DefaultResponse:
+                  $ref: "#/components/examples/Forbidden"
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              examples:
+                DefaultResponse:
+                  $ref: "#/components/examples/NotFoundResponse"
+    put:
+      description: Update admin by ID
+      tags:
+        - Admin
+      security:
+        - bearerAuth: []
+      requestBody:
+        $ref: "#/components/requestBodies/User"
+      parameters:
+        - name: id
+          in: path
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: integer
+            example: 2
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              examples:
+                DefaultResponse:
+                  $ref: "#/components/examples/SuccessDetailUser"
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              examples:
+                DefaultResponse:
+                  $ref: "#/components/examples/NotAuthenticated"
+        "403":
+          description: Forbidden
+          content:
+            application/json:
+              examples:
+                DefaultResponse:
+                  $ref: "#/components/examples/Forbidden"
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              examples:
+                DefaultResponse:
+                  $ref: "#/components/examples/NotFoundResponse"
+    delete:
+      description: Delete admin by ID
+      tags:
+        - Admin
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: integer
+            example: 2
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              examples:
+                DefaultResponse:
+                  $ref: "#/components/examples/SuccessDelete"
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              examples:
+                DefaultResponse:
+                  $ref: "#/components/examples/NotAuthenticated"
+        "403":
+          description: Forbidden
+          content:
+            application/json:
+              examples:
+                DefaultResponse:
+                  $ref: "#/components/examples/Forbidden"
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              examples:
+                DefaultResponse:
+                  $ref: "#/components/examples/NotFoundResponse"
+  /cars:
+    get:
+      description: Get all cars
+      tags:
+        - Car
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              examples:
+                DefaultResponse:
+                  $ref: "#/components/examples/SuccessListCars"
+    post:
+      description: Create new car
+      tags:
+        - Car
+      security:
+        - bearerAuth: []
+      requestBody:
+        $ref: "#/components/requestBodies/Cars"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              examples:
+                DefaultResponse:
+                  $ref: "#/components/examples/SuccessDetailCar"
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              examples:
+                DefaultResponse:
+                  $ref: "#/components/examples/NotAuthenticated"
+        "403":
+          description: Forbidden
+          content:
+            application/json:
+              examples:
+                DefaultResponse:
+                  $ref: "#/components/examples/Forbidden"
+  /cars/{id}:
+    get:
+      description: Get car by ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: integer
+            example: 1
+      tags:
+        - Car
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              examples:
+                DefaultResponse:
+                  $ref: "#/components/examples/SuccessDetailCar"
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              examples:
+                DefaultResponse:
+                  $ref: "#/components/examples/NotFoundResponse"
+    put:
+      description: Update car by ID
+      tags:
+        - Car
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: integer
+            example: 2
+      requestBody:
+        $ref: "#/components/requestBodies/Cars"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              examples:
+                DefaultResponse:
+                  $ref: "#/components/examples/SuccessDetailCar"
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              examples:
+                DefaultResponse:
+                  $ref: "#/components/examples/NotAuthenticated"
+        "403":
+          description: Forbidden
+          content:
+            application/json:
+              examples:
+                DefaultResponse:
+                  $ref: "#/components/examples/Forbidden"
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              examples:
+                DefaultResponse:
+                  $ref: "#/components/examples/NotFoundResponse"
+    delete:
+      description: Delete car by ID
+      tags:
+        - Car
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: integer
+            example: 3
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              examples:
+                DefaultResponse:
+                  $ref: "#/components/examples/SuccessDelete"
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              examples:
+                DefaultResponse:
+                  $ref: "#/components/examples/NotAuthenticated"
+        "403":
+          description: Forbidden
+          content:
+            application/json:
+              examples:
+                DefaultResponse:
+                  $ref: "#/components/examples/Forbidden"
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              examples:
+                DefaultResponse:
+                  $ref: "#/components/examples/NotFoundResponse"
