@@ -35,6 +35,12 @@ class NotFound extends ApplicationError {
   }
 }
 
+class Forbidden extends ApplicationError {
+  constructor() {
+    super(403);
+  }
+}
+
 const SuccessFetchResponse = (res, data) => {
   return res.status(200).json({
     success: true,
@@ -43,6 +49,7 @@ const SuccessFetchResponse = (res, data) => {
 };
 
 module.exports = {
+  Forbidden,
   InternalServerError,
   NotAuthenticated,
   NotFound,

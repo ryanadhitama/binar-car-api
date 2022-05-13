@@ -34,6 +34,10 @@ class UserService {
     const user = await UserRepository.getOneById(id);
     return user;
   }
+  async getAllAdmins() {
+    const user = await UserRepository.getByRole({ role: "ADMIN" });
+    return user;
+  }
 }
 
 module.exports = new UserService();
